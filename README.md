@@ -5,7 +5,6 @@ A fully redesigned, modern Library Management System built with HTML, CSS, JavaS
 ## 🚀 Live Demo
 Open `index.html` directly in any browser — **no server needed!**
 
-Or visit the GitHub Pages link: `https://rajpra786.github.io/Library-Management-System/index.html`
 
 ---
 
