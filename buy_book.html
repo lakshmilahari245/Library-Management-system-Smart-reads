@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Books — SmartReads</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; position: relative; z-index: 1; padding: 2rem 2.5rem; }
+    .sub { color: var(--text-muted); font-size: .875rem; margin-bottom: 2rem; }
+    .retailers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .retailer-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; transition: all .25s ease; }
+    .retailer-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .retailer-avatar { width: 72px; height: 72px; border-radius: 16px; background: linear-gradient(135deg,var(--gold-dim),var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 1.25rem; }
+    .retailer-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: .25rem; }
+    .retailer-card .role { font-size: .78rem; color: var(--gold); margin-bottom: 1rem; font-weight: 500; }
+    .contact-item { display: flex; align-items: center; gap: .6rem; font-size: .85rem; color: var(--text-muted); margin-bottom: .5rem; }
+    .contact-item a { color: var(--text-muted); text-decoration: none; }
+    .contact-item a:hover { color: var(--gold); }
+    .retailer-card .btn { margin-top: 1.25rem; width: 100%; justify-content: center; }
+    @media (max-width: 600px) { main { padding: 1.5rem 1rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-brand">📚 SmartReads <span class="badge">Admin</span></div>
+    <div class="nav-actions">
+      <a href="admin_portal.html" class="btn btn-ghost btn-sm">← Dashboard</a>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-header" style="padding:0 0 1.5rem">
+      <h1>Buy Books</h1>
+      <p class="sub">Contact our trusted suppliers and retailers to purchase new books for the library</p>
+    </div>
+
+    <div class="retailers-grid">
+      <div class="retailer-card">
+        <div class="retailer-avatar">📚</div>
+        <h3>Rajendra Prajapat</h3>
+        <div class="role">📦 Primary Supplier</div>
+        <div class="contact-item">✉️ <a href="mailto:rajandra1999@gmail.com">rajandra1999@gmail.com</a></div>
+        <div class="contact-item">📞 +91 9001162690</div>
+        <div class="contact-item">🌐 <a href="https://www.google.com" target="_blank">Visit Website</a></div>
+        <a href="mailto:rajandra1999@gmail.com" class="btn btn-gold">📧 Contact Supplier</a>
+      </div>
+
+      <div class="retailer-card">
+        <div class="retailer-avatar">📖</div>
+        <h3>Raj Deepu</h3>
+        <div class="role">📦 Secondary Supplier</div>
+        <div class="contact-item">✉️ <a href="mailto:deppo@gmail.com">deppo@gmail.com</a></div>
+        <div class="contact-item">📞 +91 9885162690</div>
+        <div class="contact-item">🌐 <a href="https://www.google.com" target="_blank">Visit Website</a></div>
+        <a href="mailto:deppo@gmail.com" class="btn btn-gold">📧 Contact Supplier</a>
+      </div>
+
+      <div class="retailer-card">
+        <div class="retailer-avatar">🏪</div>
+        <h3>Add New Supplier</h3>
+        <div class="role">➕ New Contact</div>
+        <p style="font-size:.85rem;color:var(--text-dim);margin-top:.5rem">Add a new book supplier or retailer contact to expand your procurement network.</p>
+        <button class="btn btn-outline" onclick="toast('Feature coming soon!', '🚧')">+ Add Supplier</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast"><span class="toast-icon" id="toast-icon">✅</span><span class="toast-msg" id="toast-msg"></span></div>
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => requireAdmin());
+    function doLogout() { clearSession(); window.location.href = 'index.html'; }
+  </script>
+</body>
+</html>

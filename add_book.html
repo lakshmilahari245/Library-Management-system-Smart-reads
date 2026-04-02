@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Book — SmartReads</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 2.5rem 1rem; position: relative; z-index: 1; }
+    .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; width: 100%; max-width: 580px; animation: fadeUp 0.5s ease both; }
+    .form-card h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.35rem; }
+    .form-card .sub { color: var(--text-muted); font-size: .875rem; margin-bottom: 2rem; }
+    .file-upload { background: var(--surface); border: 2px dashed var(--border); border-radius: 10px; padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.2s; }
+    .file-upload:hover { border-color: var(--gold-dim); }
+    .file-upload input { display: none; }
+    .file-upload-label { color: var(--text-muted); font-size: .875rem; cursor: pointer; }
+    .file-upload-label strong { color: var(--gold); }
+    #file-name { margin-top: .5rem; font-size: .8rem; color: var(--gold); min-height: 1.2em; }
+    .form-actions { display: flex; gap: .75rem; margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-brand">📚 SmartReads <span class="badge">Admin</span></div>
+    <div class="nav-actions">
+      <a href="admin_portal.html" class="btn btn-ghost btn-sm">← Dashboard</a>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="form-card">
+      <h2>Add New Book</h2>
+      <p class="sub">Fill in the book details to add it to the library catalog</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Book Code *</label>
+          <input class="form-control" type="number" id="code" placeholder="e.g. 1001">
+        </div>
+        <div class="form-group">
+          <label>Subject *</label>
+          <input class="form-control" type="text" id="subject" placeholder="e.g. Computer Science">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Book Title *</label>
+        <input class="form-control" type="text" id="title" placeholder="Enter the full book title">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Author 1 *</label>
+          <input class="form-control" type="text" id="author1" placeholder="Primary author">
+        </div>
+        <div class="form-group">
+          <label>Author 2 (optional)</label>
+          <input class="form-control" type="text" id="author2" placeholder="Co-author">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Tags</label>
+        <textarea class="form-control" id="tags" placeholder="Tags for search, e.g: algorithms, data structures, programming"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Upload eBook (optional)</label>
+        <div class="file-upload" onclick="document.getElementById('ebook').click()">
+          <input type="file" id="ebook" accept=".pdf,.epub" onchange="showFileName(this)">
+          <label class="file-upload-label" for="ebook">
+            📁 <strong>Click to upload</strong> or drag and drop<br>PDF or EPUB files
+          </label>
+          <div id="file-name"></div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="admin_portal.html" class="btn btn-ghost" style="flex:1;justify-content:center">Cancel</a>
+        <button class="btn btn-gold" onclick="doAddBook()" style="flex:2">Add Book to Catalog</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast"><span class="toast-icon" id="toast-icon">✅</span><span class="toast-msg" id="toast-msg"></span></div>
+  <script src="js/data.js"></script>
+  <script src="js/add_book.js"></script>
+</body>
+</html>

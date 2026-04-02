@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — SmartReads</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .portal-body { padding: 2rem 2.5rem; display: flex; flex-direction: column; gap: 2.5rem; position: relative; z-index: 1; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem; }
+    @media (max-width: 768px) { .portal-body { padding: 1rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-brand">📚 SmartReads <span class="badge">Admin</span></div>
+    <div class="nav-actions">
+      <a href="add_book.html" class="btn btn-gold btn-sm">+ Add Book</a>
+      <a href="buy_book.html" class="btn btn-outline btn-sm">📦 Buy Books</a>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Admin Dashboard</h1>
+    <p>Manage books and monitor library activity</p>
+  </div>
+
+  <div class="portal-body">
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row"></div>
+
+    <!-- Books -->
+    <div>
+      <div class="section-header">
+        <div class="section-title">📖 Book Catalog</div>
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input class="form-control" id="book-search" type="text" placeholder="Search books..." oninput="renderBooks()" style="padding-left:2.6rem;width:240px">
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Code</th><th>Title</th><th>Author</th><th>Subject</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="books-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Users -->
+    <div>
+      <div class="section-header">
+        <div class="section-title">👥 Registered Students</div>
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input class="form-control" id="user-search" type="text" placeholder="Search students..." oninput="renderUsers()" style="padding-left:2.6rem;width:240px">
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Roll No.</th><th>Borrowed</th><th>Actions</th></tr></thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Book Modal -->
+  <div class="modal-overlay" id="edit-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Book</h3>
+        <button class="modal-close" onclick="closeModal('edit-modal')">✕</button>
+      </div>
+      <input type="hidden" id="edit-id">
+      <div class="form-row">
+        <div class="form-group"><label>Book Code</label><input class="form-control" id="edit-code" type="number"></div>
+        <div class="form-group"><label>Subject</label><input class="form-control" id="edit-subject"></div>
+      </div>
+      <div class="form-group"><label>Book Title</label><input class="form-control" id="edit-title"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Author 1</label><input class="form-control" id="edit-author1"></div>
+        <div class="form-group"><label>Author 2</label><input class="form-control" id="edit-author2"></div>
+      </div>
+      <div class="form-group"><label>Tags</label><textarea class="form-control" id="edit-tags"></textarea></div>
+      <div style="display:flex;gap:.75rem;margin-top:.5rem">
+        <button class="btn btn-ghost" onclick="closeModal('edit-modal')" style="flex:1">Cancel</button>
+        <button class="btn btn-gold" onclick="saveEdit()" style="flex:2">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- View User Modal -->
+  <div class="modal-overlay" id="user-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Student Details</h3>
+        <button class="modal-close" onclick="closeModal('user-modal')">✕</button>
+      </div>
+      <div id="user-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Confirm -->
+  <div id="confirm-overlay">
+    <div id="confirm-box">
+      <div class="confirm-icon">⚠️</div>
+      <h4 id="confirm-title"></h4>
+      <p id="confirm-msg"></p>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" onclick="closeConfirm()">Cancel</button>
+        <button class="btn btn-danger" id="confirm-ok">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"><span class="toast-icon" id="toast-icon">✅</span><span class="toast-msg" id="toast-msg"></span></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin_portal.js"></script>
+</body>
+</html>

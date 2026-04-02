@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartReads — Library Management System</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 3rem 1rem; position: relative; z-index: 1;
+    }
+    .home-content { text-align: center; max-width: 680px; animation: fadeUp 0.7s ease both; }
+    .home-icon {
+      width: 90px; height: 90px;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+      border-radius: 22px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem; font-size: 2.8rem;
+      box-shadow: 0 0 50px rgba(201,168,76,0.2);
+    }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.15; margin-bottom: 0.75rem; }
+    h1 em { color: var(--gold); font-style: normal; }
+    .sub { color: var(--text-muted); font-size: 1rem; font-weight: 300; line-height: 1.7; margin-bottom: 3rem; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; max-width: 480px; margin: 0 auto; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 2rem 1.5rem;
+      cursor: pointer; transition: all 0.25s ease; text-decoration: none; display: block;
+    }
+    .card:hover { border-color: var(--gold-dim); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 24px rgba(201,168,76,0.08); }
+    .card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; }
+    .card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .card-arrow { margin-top: 1.25rem; color: var(--gold); font-size: 0.82rem; font-weight: 500; }
+    @media (max-width: 500px) { .cards { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-brand">📚 SmartReads</div>
+  </nav>
+
+  <main>
+    <div class="home-content">
+      <div class="home-icon">📖</div>
+      <h1>Welcome to <em>SmartReads</em></h1>
+      <p class="sub">A modern library management system. Browse books, manage your collection, and track borrowing — all in one place.</p>
+      <div class="cards">
+        <a href="admin_login.html" class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Admin Portal</h3>
+          <p>Manage books, users and library operations</p>
+          <div class="card-arrow">Enter as Admin →</div>
+        </a>
+        <a href="usr_login.html" class="card">
+          <div class="card-icon">👤</div>
+          <h3>User Portal</h3>
+          <p>Browse, borrow, and return books</p>
+          <div class="card-arrow">Enter as User →</div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast"><span class="toast-icon" id="toast-icon">✅</span><span class="toast-msg" id="toast-msg"></span></div>
+  <script src="js/data.js"></script>
+  <script>
+    // Auto redirect if already logged in
+    const s = getSession();
+    if (s?.role === 'admin') window.location.href = 'admin_portal.html';
+    else if (s?.role === 'user') window.location.href = 'user_portal.html';
+  </script>
+</body>
+</html>
