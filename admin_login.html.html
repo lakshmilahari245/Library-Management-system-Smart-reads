@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — SmartReads</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; position: relative; z-index: 1; }
+    .auth-box { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; width: 100%; max-width: 420px; animation: fadeUp 0.5s ease both; }
+    .auth-box h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; margin-bottom: 0.4rem; }
+    .auth-sub { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 2rem; }
+    .hint { margin-top: 1rem; font-size: 0.78rem; color: var(--text-dim); text-align: center; background: var(--surface); border-radius: 8px; padding: 0.75rem; }
+    .hint strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-brand">📚 SmartReads</div>
+    <div class="nav-actions">
+      <a href="index.html" class="btn btn-ghost btn-sm">← Back</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="auth-box">
+      <h2>Admin Login</h2>
+      <p class="auth-sub">Enter your credentials to access the dashboard</p>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input class="form-control" type="email" id="email" placeholder="admin@gmail.com" value="admin@gmail.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" type="password" id="password" placeholder="••••••••" value="admin@123">
+      </div>
+      <button class="btn btn-gold btn-full btn-lg" onclick="doLogin()">Login to Dashboard</button>
+
+      <div class="hint">
+        Default credentials<br>
+        <strong>admin@gmail.com</strong> / <strong>admin@123</strong>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast"><span class="toast-icon" id="toast-icon">✅</span><span class="toast-msg" id="toast-msg"></span></div>
+  <script src="js/data.js"></script>
+  <script src="js/admin_login.js"></script>
+</body>
+</html>
